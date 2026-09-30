@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080912">
+  <title>AetherBrackets™ Loading</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Orbitron:wght@500;700&display=swap');
+
+    :root {
+      color-scheme: dark;
+      font-family: 'Inter', sans-serif;
+      background: #080912;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      min-width: 280px;
+      min-height: 100vh;
+      min-height: 100dvh;
+      margin: 0;
+    }
+
+    .stage {
+      display: grid;
+      min-height: 100vh;
+      min-height: 100dvh;
+      place-items: center;
+      padding: 24px;
+      background:
+        radial-gradient(circle at 50% 44%, rgba(111, 55, 177, .17), transparent 32rem),
+        radial-gradient(circle at 75% 80%, rgba(34, 211, 238, .07), transparent 26rem),
+        #080912;
+    }
+
+    .loader {
+      position: relative;
+      display: flex;
+      width: min(100%, 390px);
+      flex-direction: column;
+      align-items: center;
+      padding: 37px 32px 32px;
+      overflow: hidden;
+      border: 1px solid rgba(194, 185, 255, .12);
+      border-radius: 24px;
+      background: linear-gradient(145deg, rgba(26, 23, 43, .92), rgba(13, 16, 30, .94));
+      box-shadow: 0 24px 80px rgba(0, 0, 0, .32), inset 0 1px rgba(255, 255, 255, .04);
+      text-align: center;
+    }
+
+    .loader::before {
+      position: absolute;
+      top: 0;
+      right: 16%;
+      left: 16%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(168, 85, 247, .6), rgba(34, 211, 238, .6), transparent);
+      content: "";
+    }
+
+    .mark {
+      position: relative;
+      display: grid;
+      width: 68px;
+      height: 68px;
+      margin-bottom: 23px;
+      place-items: center;
+    }
+
+    .mark-ring {
+      position: absolute;
+      inset: 2px;
+      border: 1.5px solid transparent;
+      border-top-color: #a855f7;
+      border-right-color: rgba(34, 211, 238, .65);
+      border-radius: 50%;
+      animation: rotate 2.8s linear infinite;
+    }
+
+    .mark-ring::after {
+      position: absolute;
+      inset: 7px;
+      border: 1px solid rgba(168, 85, 247, .18);
+      border-radius: 50%;
+      content: "";
+    }
+
+    .mark-brackets {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font: 700 27px/1 'Orbitron', sans-serif;
+      color: #a5f3fc;
+      text-shadow: 0 0 15px rgba(34, 211, 238, .55);
+    }
+
+    .mark-brackets span:first-child { animation: leftBracket 1.8s ease-in-out infinite; }
+    .mark-brackets span:last-child { animation: rightBracket 1.8s ease-in-out infinite; }
+
+    .mark-core {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #c084fc;
+      box-shadow: 0 0 13px 4px rgba(168, 85, 247, .45);
+      animation: corePulse 1.8s ease-in-out infinite;
+    }
+
+    .brand {
+      margin: 0;
+      font: 700 clamp(17px, 5.2vw, 21px)/1.4 'Orbitron', sans-serif;
+      letter-spacing: .015em;
+      background: linear-gradient(105deg, #f0eaff, #c4b5fd 48%, #8be8f2);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .brand sup {
+      position: relative;
+      top: -.15em;
+      font-family: 'Inter', sans-serif;
+      font-size: .48em;
+      font-weight: 600;
+    }
+
+    .loading {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      margin: 11px 0 26px;
+      color: #a6a8c3;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: .32em;
+    }
+
+    .dots {
+      display: inline-flex;
+      gap: 4px;
+      margin-left: 1px;
+    }
+
+    .dots span {
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+      background: #67e8f9;
+      animation: dotPulse 1.2s ease-in-out infinite;
+    }
+
+    .dots span:nth-child(2) { animation-delay: .2s; }
+    .dots span:nth-child(3) { animation-delay: .4s; }
+
+    .progress {
+      width: 100%;
+      height: 3px;
+      overflow: hidden;
+      border-radius: 999px;
+      background: rgba(177, 181, 210, .13);
+    }
+
+    .progress::before {
+      display: block;
+      width: 38%;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, #a855f7, #22d3ee);
+      box-shadow: 0 0 13px rgba(34, 211, 238, .55);
+      content: "";
+      animation: progress 1.8s ease-in-out infinite;
+    }
+
+    @keyframes rotate { to { transform: rotate(360deg); } }
+    @keyframes leftBracket {
+      50% { transform: translateX(3px); }
+    }
+    @keyframes rightBracket {
+      50% { transform: translateX(-3px); }
+    }
+    @keyframes corePulse {
+      50% { transform: scale(.65); opacity: .55; }
+    }
+    @keyframes dotPulse {
+      0%, 70%, 100% { opacity: .3; transform: translateY(0); }
+      35% { opacity: 1; transform: translateY(-3px); }
+    }
+    @keyframes progress {
+      0% { transform: translateX(-105%); }
+      100% { transform: translateX(270%); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+      }
+      .progress::before { transform: translateX(80%); }
+    }
+  </style>
+</head>
+<body>
+  <main class="stage">
+    <div class="loader" role="status" aria-label="AetherBrackets loading">
+      <div class="mark" aria-hidden="true">
+        <div class="mark-ring"></div>
+        <div class="mark-brackets">
+          <span>[</span><span class="mark-core"></span><span>]</span>
+        </div>
+      </div>
+
+      <h1 class="brand">AetherBrackets<sup>™</sup></h1>
+
+      <div class="loading" aria-hidden="true">
+        <span>LOADING</span>
+        <span class="dots"><span></span><span></span><span></span></span>
+      </div>
+
+      <div class="progress" aria-hidden="true"></div>
+    </div>
+  </main>
+</body>
+</html>
